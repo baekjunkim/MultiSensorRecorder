@@ -110,79 +110,41 @@ class MainPageActivity : AppCompatActivity() {
         }
     }
 
+    private fun addListenerOnSensorButtonHelper(sensorId: Int, sensorType: Int, sensorTypeToString: String) {
+        findViewById<Button>(sensorId).setOnClickListener {
+            sensorHandler[sensorType] = !sensorHandler[sensorType]!!
+            if (sensorHandler[sensorType]!!) {
+                if (sensorManager.getDefaultSensor(sensorType) != null) {
+                    it.setBackgroundResource(R.drawable.rounded_button_selected)
+                } else {
+                    Toast.makeText(this,
+                        "$sensorTypeToString sensor is not available on this device",
+                        Toast.LENGTH_LONG).show()
+                    sensorHandler[sensorType] = !sensorHandler[sensorType]!!
+                }
+            } else {
+                it.setBackgroundResource(R.drawable.rounded_button)
+            }
+        }
+    }
+
     private fun addListenerOnSensorButton() {
-        findViewById<Button>(R.id.button_accelerometer).setOnClickListener {
-            sensorHandler[Sensor.TYPE_ACCELEROMETER] = !sensorHandler[Sensor.TYPE_ACCELEROMETER]!!
-            if (sensorHandler[Sensor.TYPE_ACCELEROMETER]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
-        findViewById<Button>(R.id.button_gravity).setOnClickListener {
-            sensorHandler[Sensor.TYPE_GRAVITY] = !sensorHandler[Sensor.TYPE_GRAVITY]!!
-            if (sensorHandler[Sensor.TYPE_GRAVITY]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
-        findViewById<Button>(R.id.button_gyroscope).setOnClickListener {
-            sensorHandler[Sensor.TYPE_GYROSCOPE] = !sensorHandler[Sensor.TYPE_GYROSCOPE]!!
-            if (sensorHandler[Sensor.TYPE_GYROSCOPE]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
-        findViewById<Button>(R.id.button_light).setOnClickListener {
-            sensorHandler[Sensor.TYPE_LIGHT] = !sensorHandler[Sensor.TYPE_LIGHT]!!
-            if (sensorHandler[Sensor.TYPE_LIGHT]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
-        findViewById<Button>(R.id.button_linearAcceleration).setOnClickListener {
-            sensorHandler[Sensor.TYPE_LINEAR_ACCELERATION] = !sensorHandler[Sensor.TYPE_LINEAR_ACCELERATION]!!
-            if (sensorHandler[Sensor.TYPE_LINEAR_ACCELERATION]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
-        findViewById<Button>(R.id.button_magneticField).setOnClickListener {
-            sensorHandler[Sensor.TYPE_MAGNETIC_FIELD] = !sensorHandler[Sensor.TYPE_MAGNETIC_FIELD]!!
-            if (sensorHandler[Sensor.TYPE_MAGNETIC_FIELD]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
-        findViewById<Button>(R.id.button_proximity).setOnClickListener {
-            sensorHandler[Sensor.TYPE_PROXIMITY] = !sensorHandler[Sensor.TYPE_PROXIMITY]!!
-            if (sensorHandler[Sensor.TYPE_PROXIMITY]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
-        findViewById<Button>(R.id.button_rotationVector).setOnClickListener {
-            sensorHandler[Sensor.TYPE_ROTATION_VECTOR] = !sensorHandler[Sensor.TYPE_ROTATION_VECTOR]!!
-            if (sensorHandler[Sensor.TYPE_ROTATION_VECTOR]!!) {
-                it.setBackgroundResource(R.drawable.rounded_button_selected)
-            }
-            else {
-                it.setBackgroundResource(R.drawable.rounded_button)
-            }
-        }
+        addListenerOnSensorButtonHelper(R.id.button_accelerometer, Sensor.TYPE_ACCELEROMETER,
+            "Accelerometer")
+        addListenerOnSensorButtonHelper(R.id.button_gravity, Sensor.TYPE_GRAVITY,
+            "Gravity")
+        addListenerOnSensorButtonHelper(R.id.button_gyroscope, Sensor.TYPE_GYROSCOPE,
+            "Gyroscope")
+        addListenerOnSensorButtonHelper(R.id.button_light, Sensor.TYPE_LIGHT,
+            "Light")
+        addListenerOnSensorButtonHelper(R.id.button_linearAcceleration, Sensor.TYPE_LINEAR_ACCELERATION,
+            "Linear Acceleration")
+        addListenerOnSensorButtonHelper(R.id.button_magneticField, Sensor.TYPE_MAGNETIC_FIELD,
+            "Magnetic Field")
+        addListenerOnSensorButtonHelper(R.id.button_proximity, Sensor.TYPE_PROXIMITY,
+            "Proximity")
+        addListenerOnSensorButtonHelper(R.id.button_rotationVector, Sensor.TYPE_ROTATION_VECTOR,
+            "Rotation Vector")
         findViewById<Button>(R.id.button_gpsPosition).setOnClickListener {
             if (locationPermission) {
                 locationHandler = !locationHandler
@@ -197,40 +159,37 @@ class MainPageActivity : AppCompatActivity() {
         }
     }
 
+    private fun addListenerOnImageButtonHelper(intent: Intent, sensorId: Int, sensorType: Int, sensorTypeToString: String) {
+        findViewById<ImageButton>(sensorId).setOnClickListener {
+            if (sensorManager.getDefaultSensor(sensorType) != null) {
+                intent.putExtra("sensor", Sensor.TYPE_ACCELEROMETER)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this,
+                    "$sensorTypeToString sensor is not available on this device",
+                    Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     private fun addListenerOnImageButton() {
         val intent = Intent(this, PreviewPageActivity::class.java)
-        findViewById<ImageButton>(R.id.imageButton_accelerometer).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_ACCELEROMETER)
-            startActivity(intent)
-        }
-        findViewById<ImageButton>(R.id.imageButton_gravity).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_GRAVITY)
-            startActivity(intent)
-        }
-        findViewById<ImageButton>(R.id.imageButton_gyroscope).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_GYROSCOPE)
-            startActivity(intent)
-        }
-        findViewById<ImageButton>(R.id.imageButton_light).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_LIGHT)
-            startActivity(intent)
-        }
-        findViewById<ImageButton>(R.id.imageButton_linearAcceleration).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_LINEAR_ACCELERATION)
-            startActivity(intent)
-        }
-        findViewById<ImageButton>(R.id.imageButton_magneticField).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_MAGNETIC_FIELD)
-            startActivity(intent)
-        }
-        findViewById<ImageButton>(R.id.imageButton_proximity).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_PROXIMITY)
-            startActivity(intent)
-        }
-        findViewById<ImageButton>(R.id.imageButton_rotationVector).setOnClickListener {
-            intent.putExtra("sensor", Sensor.TYPE_ROTATION_VECTOR)
-            startActivity(intent)
-        }
+        addListenerOnImageButtonHelper(intent, R.id.button_accelerometer, Sensor.TYPE_ACCELEROMETER,
+            "Accelerometer")
+        addListenerOnImageButtonHelper(intent, R.id.button_gravity, Sensor.TYPE_GRAVITY,
+            "Gravity")
+        addListenerOnImageButtonHelper(intent, R.id.button_gyroscope, Sensor.TYPE_GYROSCOPE,
+            "Gyroscope")
+        addListenerOnImageButtonHelper(intent, R.id.button_light, Sensor.TYPE_LIGHT,
+            "Light")
+        addListenerOnImageButtonHelper(intent, R.id.button_linearAcceleration, Sensor.TYPE_LINEAR_ACCELERATION,
+            "Linear Acceleration")
+        addListenerOnImageButtonHelper(intent, R.id.button_magneticField, Sensor.TYPE_MAGNETIC_FIELD,
+            "Magnetic Field")
+        addListenerOnImageButtonHelper(intent, R.id.button_proximity, Sensor.TYPE_PROXIMITY,
+            "Proximity")
+        addListenerOnImageButtonHelper(intent, R.id.button_rotationVector, Sensor.TYPE_ROTATION_VECTOR,
+            "Rotation Vector")
     }
 
     @SuppressLint("SetTextI18n")
@@ -240,16 +199,14 @@ class MainPageActivity : AppCompatActivity() {
                 if (sensorHandler.filter { s -> s.value }.isEmpty() && !locationHandler) {
                     Toast.makeText(this,
                         "Select at least one sensor",
-                        Toast.LENGTH_LONG
-                    ).show()
+                        Toast.LENGTH_LONG).show()
                 } else try {
                     // catch NumberFormatException if there is no input for delay
                     mDelay = 1000 /
                             Integer.valueOf(findViewById<EditText>(R.id.editText_mDelay).text.toString())
                     Toast.makeText(this,
                         "Start recording selected sensor(s)",
-                        Toast.LENGTH_LONG
-                    ).show()
+                        Toast.LENGTH_LONG).show()
                     it.setBackgroundResource(R.drawable.rounded_button)
                     findViewById<Button>(R.id.button_record).text = "stop"
                     // register selected sensors
@@ -267,14 +224,12 @@ class MainPageActivity : AppCompatActivity() {
                 } catch (e: java.lang.NumberFormatException) {
                     Toast.makeText(this,
                         "Invalid input",
-                        Toast.LENGTH_LONG
-                    ).show()
+                        Toast.LENGTH_LONG).show()
                 }
             } else {
                 Toast.makeText(this,
                     "Saving data at ${this.getExternalFilesDir(null)}",
-                    Toast.LENGTH_LONG)
-                    .show()
+                    Toast.LENGTH_LONG).show()
                 it.setBackgroundResource(R.drawable.rounded_button_selected)
                 findViewById<Button>(R.id.button_record).text = "record"
                 // unregister sensors
