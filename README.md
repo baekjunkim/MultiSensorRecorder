@@ -1,6 +1,28 @@
+Multi-Sensor Recorder
+================
+
+Android App for 2.3.3 Android OS and above.
+
+The User can select Hardware and Software Sensors and record the realtime values of  
+
+- Accelerometer
+- Gravity
+- Gyroscope
+- Light
+- Linear Acceleration
+- Magnetic Field
+- Proximity
+- Rotation Vector
+- GPS Position
+
+It won't be possible to record Sensors that are not available on the device.
+Location value (GPS Position) is recorded in coordinate frames
+
+Data will be automatically stored into default directory
 
 License
 -------
+
 Copyright 2019 Philipp Jahoda
 
 Licensed under the Apache License, Version 2.0 (the "License");
