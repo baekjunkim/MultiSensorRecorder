@@ -31,7 +31,7 @@ Sensors types supported:
 class MainPageActivity : AppCompatActivity() {
 
     private lateinit var sensorManager: SensorManager
-    private var sensorHandler: HashMap<Int, Boolean> = hashMapOf(
+    private var sensorHandler = mutableMapOf<Int, Boolean>(
         Sensor.TYPE_ACCELEROMETER to false,
         Sensor.TYPE_GRAVITY to false,
         Sensor.TYPE_GYROSCOPE to false,
@@ -51,7 +51,7 @@ class MainPageActivity : AppCompatActivity() {
     private var dataRecord: DataRecord? = null
 
     companion object {
-        val sensorData = hashMapOf(
+        val sensorData = mutableMapOf<Int, FloatArray>(
             Sensor.TYPE_ACCELEROMETER to FloatArray(3),
             Sensor.TYPE_GRAVITY to FloatArray(3),
             Sensor.TYPE_GYROSCOPE to FloatArray(3),

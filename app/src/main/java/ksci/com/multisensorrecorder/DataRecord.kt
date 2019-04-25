@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
-class DataRecord(_sensorHandler: HashMap<Int, Boolean>, _locationHandler: Boolean) {
+class DataRecord(_sensorHandler: MutableMap<Int, Boolean>, _locationHandler: Boolean) {
 
     private val sensorHandler = _sensorHandler.filter {it.value}.map {it.key}
     private val locationHandler = _locationHandler
