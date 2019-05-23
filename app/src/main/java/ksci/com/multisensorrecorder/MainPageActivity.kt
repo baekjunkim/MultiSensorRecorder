@@ -8,13 +8,14 @@ import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.location.LocationManager
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.widget.*
+import androidx.annotation.RequiresApi
 
 /*
 Sensors types supported:
@@ -31,7 +32,7 @@ Sensors types supported:
 class MainPageActivity : AppCompatActivity() {
 
     private lateinit var sensorManager: SensorManager
-    private var sensorHandler = mutableMapOf<Int, Boolean>(
+    private var sensorHandler = mutableMapOf(
         Sensor.TYPE_ACCELEROMETER to false,
         Sensor.TYPE_GRAVITY to false,
         Sensor.TYPE_GYROSCOPE to false,
@@ -49,9 +50,10 @@ class MainPageActivity : AppCompatActivity() {
     private val requestLocation = 2
 
     private var dataRecord: DataRecord? = null
+    private lateinit var popupWindow: PopupWindow
 
     companion object {
-        val sensorData = mutableMapOf<Int, FloatArray>(
+        val sensorData = mutableMapOf(
             Sensor.TYPE_ACCELEROMETER to FloatArray(3),
             Sensor.TYPE_GRAVITY to FloatArray(3),
             Sensor.TYPE_GYROSCOPE to FloatArray(3),
@@ -68,6 +70,7 @@ class MainPageActivity : AppCompatActivity() {
         var mDelay: Int = 1000 // 1000 = every 1 second
     }
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page)
@@ -174,21 +177,21 @@ class MainPageActivity : AppCompatActivity() {
 
     private fun addListenerOnImageButton() {
         val intent = Intent(this, PreviewPageActivity::class.java)
-        addListenerOnImageButtonHelper(intent, R.id.button_accelerometer, Sensor.TYPE_ACCELEROMETER,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_accelerometer, Sensor.TYPE_ACCELEROMETER,
             "Accelerometer")
-        addListenerOnImageButtonHelper(intent, R.id.button_gravity, Sensor.TYPE_GRAVITY,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_gravity, Sensor.TYPE_GRAVITY,
             "Gravity")
-        addListenerOnImageButtonHelper(intent, R.id.button_gyroscope, Sensor.TYPE_GYROSCOPE,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_gyroscope, Sensor.TYPE_GYROSCOPE,
             "Gyroscope")
-        addListenerOnImageButtonHelper(intent, R.id.button_light, Sensor.TYPE_LIGHT,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_light, Sensor.TYPE_LIGHT,
             "Light")
-        addListenerOnImageButtonHelper(intent, R.id.button_linearAcceleration, Sensor.TYPE_LINEAR_ACCELERATION,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_linearAcceleration, Sensor.TYPE_LINEAR_ACCELERATION,
             "Linear Acceleration")
-        addListenerOnImageButtonHelper(intent, R.id.button_magneticField, Sensor.TYPE_MAGNETIC_FIELD,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_magneticField, Sensor.TYPE_MAGNETIC_FIELD,
             "Magnetic Field")
-        addListenerOnImageButtonHelper(intent, R.id.button_proximity, Sensor.TYPE_PROXIMITY,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_proximity, Sensor.TYPE_PROXIMITY,
             "Proximity")
-        addListenerOnImageButtonHelper(intent, R.id.button_rotationVector, Sensor.TYPE_ROTATION_VECTOR,
+        addListenerOnImageButtonHelper(intent, R.id.imageButton_rotationVector, Sensor.TYPE_ROTATION_VECTOR,
             "Rotation Vector")
     }
 
@@ -221,6 +224,24 @@ class MainPageActivity : AppCompatActivity() {
                     mRecord = true
                     dataRecord = DataRecord(sensorHandler, locationHandler)
                     dataRecord!!.sensorDataWrite(this.getExternalFilesDir(null)!!, mDelay)
+
+                    // pop popupWindow
+                    val inflaterPopup: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    val viewPopup = inflaterPopup.inflate(R.layout.recording_popup_view,null)
+
+                    popupWindow = PopupWindow(
+                        viewPopup, // Custom view to show in popup window
+                        LinearLayout.LayoutParams.MATCH_PARENT, // Width of popup window
+                        findViewById<ScrollView>(R.id.scroll_view).height // Window height
+                    )
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        popupWindow.showAsDropDown(findViewById(R.id.title), 0, 0, Gravity.END)
+                    } else {
+                        val rootLayout = findViewById<ScrollView>(R.id.scroll_view)
+                        popupWindow.showAsDropDown(rootLayout, rootLayout.width - popupWindow.width, 0)
+                    }
+
                 } catch (e: java.lang.NumberFormatException) {
                     Toast.makeText(this,
                         "Invalid input",
@@ -239,6 +260,9 @@ class MainPageActivity : AppCompatActivity() {
                 // delete dataRecord
                 mRecord = false
                 dataRecord = null
+
+                // dismiss popupWindow
+                popupWindow.dismiss()
             }
         }
     }
