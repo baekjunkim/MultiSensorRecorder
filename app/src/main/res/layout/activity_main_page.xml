@@ -16,6 +16,7 @@
 
         <android.support.v7.widget.AppCompatTextView
                 android:text="@string/appTitle"
+                android:id="@+id/title"
                 android:gravity="center"
                 android:textSize="30sp"
                 app:fontFamily="@font/roboto"
@@ -34,7 +35,8 @@
             android:layout_height="0dp" android:layout_weight="15"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:id="@+id/scroll_view">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -327,16 +329,8 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp" android:layout_weight="9"
                 android:layout_marginLeft="5dp" android:layout_marginStart="5dp"
+                android:layout_marginRight="50dp" android:layout_marginEnd="20dp"
                 tools:ignore="NestedWeights"/>
-
-        <ImageButton
-                android:id="@+id/imageButton_record"
-                android:layout_width="0dp"
-                android:background="@color/colorBackground1"
-                android:layout_height="match_parent" android:layout_weight="2"
-                app:srcCompat="@android:drawable/ic_menu_info_details"
-                android:contentDescription="@string/todo"
-                android:layout_marginRight="50dp" android:layout_marginEnd="20dp"/>
 
     </LinearLayout>
 
