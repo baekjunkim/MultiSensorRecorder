@@ -72,7 +72,6 @@ class DataRecord(_sensorHandler: MutableMap<Int, Boolean>, _locationHandler: Boo
                         }
                     }
                     currentDataCount++
-                    println("recording $currentDataCount line")
                     if (MainPageActivity.mRecord) Handler().postDelayed(this, mDelay.toLong())
                     else output.close()
                 }
