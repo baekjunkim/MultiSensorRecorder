@@ -85,6 +85,7 @@ class MainPageActivity : AppCompatActivity() {
         addListenerOnSensorButton()
         addListenerOnImageButton()
         addListenerOnRecordButton()
+        addListenerOnSeekBar()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -195,6 +196,25 @@ class MainPageActivity : AppCompatActivity() {
             "Rotation Vector")
     }
 
+    private fun addListenerOnSeekBar() {
+        val delayText = findViewById<TextView>(R.id.textView_mDelay)
+        findViewById<SeekBar>(R.id.delay_seekBar).setOnSeekBarChangeListener(
+            object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                    var convertedProgress = (progress / 4.0).toInt()
+                    if (convertedProgress == 0) convertedProgress = 1
+                    delayText.text = getString(R.string.delay_record, convertedProgress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                }
+            }
+        )
+    }
+
     @SuppressLint("SetTextI18n")
     private fun addListenerOnRecordButton() {
         findViewById<Button>(R.id.button_record).setOnClickListener {
@@ -206,7 +226,7 @@ class MainPageActivity : AppCompatActivity() {
                 } else try {
                     // catch NumberFormatException if there is no input for delay
                     mDelay = 1000 /
-                            Integer.valueOf(findViewById<EditText>(R.id.editText_mDelay).text.toString())
+                            Integer.valueOf(findViewById<TextView>(R.id.textView_mDelay).text.split(" ")[0])
                     Toast.makeText(this,
                         "Start recording selected sensor(s)",
                         Toast.LENGTH_LONG).show()
