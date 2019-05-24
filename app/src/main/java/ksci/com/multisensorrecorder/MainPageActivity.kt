@@ -223,8 +223,7 @@ class MainPageActivity : AppCompatActivity() {
                     Toast.makeText(this,
                         "Select at least one sensor",
                         Toast.LENGTH_LONG).show()
-                } else try {
-                    // catch NumberFormatException if there is no input for delay
+                } else {
                     mDelay = 1000 /
                             Integer.valueOf(findViewById<TextView>(R.id.textView_mDelay).text.split(" ")[0])
                     Toast.makeText(this,
@@ -261,11 +260,6 @@ class MainPageActivity : AppCompatActivity() {
                         val rootLayout = findViewById<ScrollView>(R.id.scroll_view)
                         popupWindow.showAsDropDown(rootLayout, rootLayout.width - popupWindow.width, 0)
                     }
-
-                } catch (e: java.lang.NumberFormatException) {
-                    Toast.makeText(this,
-                        "Invalid input",
-                        Toast.LENGTH_LONG).show()
                 }
             } else {
                 Toast.makeText(this,
