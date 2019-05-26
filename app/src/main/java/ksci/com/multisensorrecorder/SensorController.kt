@@ -11,6 +11,9 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
     private val sensorManager = _sensorManager
     private val type = _type
 
+    var minYAxis = 0f
+    var maxYAxis = 0f
+
     override fun onSensorChanged(event: SensorEvent) {
         when (type) {
             "record" -> {
@@ -116,6 +119,17 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
                 data.getDataSetByIndex(2).addEntry(Entry(s3.entryCount.toFloat(), event.values[2]))
                 data.getDataSetByIndex(3).addEntry(Entry(s4.entryCount.toFloat(), event.values[3]))
             }
+        }
+
+        val yAxis = PreviewPageActivity.yAxis
+
+        if (event.values.min()?:0f < minYAxis) {
+            minYAxis = event.values.min()?:0f
+            yAxis.axisMinimum = minYAxis * 11/10
+        }
+        if (event.values.max()?:0f > maxYAxis) {
+            maxYAxis = event.values.max()?:0f
+            yAxis.axisMaximum = maxYAxis * 11/10
         }
 
         mChart.data.notifyDataChanged()

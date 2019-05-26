@@ -37,6 +37,7 @@ class PreviewPageActivity : AppCompatActivity() {
         var sensorType: Int = 0
 
         lateinit var mChart: LineChart
+        lateinit var yAxis: YAxis
         lateinit var s1: LineDataSet
         lateinit var s2: LineDataSet
         lateinit var s3: LineDataSet
@@ -70,11 +71,9 @@ class PreviewPageActivity : AppCompatActivity() {
         legend.form = Legend.LegendForm.LINE
         legend.textColor = Color.BLACK
 
-        val yAxis = mChart.axisLeft
+        yAxis = mChart.axisLeft
         yAxis.setDrawGridLines(true)
         yAxis.textColor = Color.BLACK
-        yAxis.axisMinimum = -10f
-        yAxis.axisMaximum = 10f
 
         s1 = createSet("x", Color.BLUE)
         s2 = createSet("y", Color.RED)
@@ -112,7 +111,7 @@ class PreviewPageActivity : AppCompatActivity() {
         set.setDrawValues(false)
         set.setDrawCircles(false)
         set.mode = LineDataSet.Mode.CUBIC_BEZIER
-        set.cubicIntensity = 0.2f
+        set.cubicIntensity = 1.5f
         return set
     }
 
