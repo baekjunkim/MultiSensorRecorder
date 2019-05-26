@@ -9,6 +9,9 @@
 
     <color name="colorBackground1">#41004d</color>
     <color name="colorBackground2">#7c1f8c</color>
+    <color name="colorBackground3">#EA80FC</color>
+    <color name="colorBackground4">#B64FC8</color>
 
-    <color name="colorButtonEdge">#EC80FF</color>
+    <color name="colorMainSub">#EC80FF</color>
+    <color name="colorPreviewSub">#FFB2FF</color>
 </resources>

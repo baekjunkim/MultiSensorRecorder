@@ -60,7 +60,7 @@ class PreviewPageActivity : AppCompatActivity() {
     private fun createChart(sensorType: Int) {
         mChart = findViewById(R.id.chart)
         mChart.description.isEnabled = false
-        mChart.setBackgroundColor(Color.WHITE)
+//        mChart.setBackgroundColor(Color.WHITE)
         mChart.setDrawBorders(true)
         mChart.data = LineData() // add LineDataSet() s1, s2, s3, or s4 to LineData()
         mChart.xAxis.isEnabled = false
