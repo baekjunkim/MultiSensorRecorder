@@ -8,7 +8,6 @@
     <string name="gyroscope">Gyroscope</string>
     <string name="rotationVector">Rotation Vector</string>
     <string name="gpsPosition">GPS Position</string>
-    <string name="compass">Compass</string>
     <string name="record">Record</string>
     <string name="stop">Stop</string>
     <string name="delay">per second</string>
@@ -16,4 +15,37 @@
     <string name="magneticField">Magnetic Field</string>
     <string name="proximity">Proximity</string>
     <string name="delay_record">%1$d record(s)</string>
+
+    <string name="sensor_name">Sensor Name</string>
+    <string name="sensor_type">Type: type</string>
+    <string name="sensor_info">Description: description</string>
+    <string name="sensor_uses">Common Uses: common uses</string>
+    <string name="accelerometer_type">Type: Hardware</string>
+    <string name="accelerometer_info">Description: Measures the acceleration force in m/s^2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity.</string>
+    <string name="accelerometer_uses">Common Uses: Motion detection (shake, tilt, etc.).</string>
+    <string name="linearAcceleration_type">Type: Software or Hardware</string>
+    <string name="linearAcceleration_info">Description: Measures the acceleration force in m/s^2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity.</string>
+    <string name="linearAcceleration_uses">Common Uses: Monitoring acceleration along a single axis.</string>
+    <string name="gravity_type">Type: Software or Hardware</string>
+    <string name="gravity_info">Description: Measures the force of gravity in m/s^2 that is applied to a device on all three physical axes (x, y, z).</string>
+    <string name="gravity_uses">Common Uses: Motion detection (shake, tilt, etc.).</string>
+    <string name="gyroscope_type">Type: Hardware</string>
+    <string name="gyroscope_info">Description: Measures a device\'s rate of rotation in rad/s around each of the three physical axes (x, y, and z).</string>
+    <string name="gyroscope_uses">Common Uses: Rotation detection (spin, turn, etc.).</string>
+    <string name="rotationVector_type">Type: Software or Hardware</string>
+    <string name="rotationVector_info">Description: Measures the orientation of a device by providing the three elements of the device\'s rotation vector.</string>
+    <string name="rotationVector_uses">Motion detection and rotation detection.</string>
+    <string name="light_type">Type: Hardware</string>
+    <string name="light_info">Description: Measures the ambient light level (illumination) in lx.</string>
+    <string name="light_uses">Common Uses: Controlling screen brightness.</string>
+    <string name="magneticField_type">Type: Hardware</string>
+    <string name="magneticField_info">Description: Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT.</string>
+    <string name="magneticField_uses">Common Uses: Creating a compass.</string>
+    <string name="proximity_type">Type: Hardware</string>
+    <string name="proximity_info">Description: Measures the proximity of an object in cm relative to the view screen of a device. This sensor is typically used to determine whether a handset is being held up to a person\'s ear.</string>
+    <string name="proximity_uses">Common Uses: Phone position during a call.</string>
+    <string name="gpsPosition_type">GPS Position</string>
+    <string name="gpsPosition_info">GPS Position</string>
+    <string name="gpsPosition_uses">GPS Position</string>
+    <string name="realTime_value">Real Time Value(s) of Sensor</string>
 </resources>

@@ -166,7 +166,7 @@ class MainPageActivity : AppCompatActivity() {
     private fun addListenerOnImageButtonHelper(intent: Intent, sensorId: Int, sensorType: Int, sensorTypeToString: String) {
         findViewById<ImageButton>(sensorId).setOnClickListener {
             if (sensorManager.getDefaultSensor(sensorType) != null) {
-                intent.putExtra("sensor", Sensor.TYPE_ACCELEROMETER)
+                intent.putExtra("sensor", sensorType)
                 startActivity(intent)
             } else {
                 Toast.makeText(this,

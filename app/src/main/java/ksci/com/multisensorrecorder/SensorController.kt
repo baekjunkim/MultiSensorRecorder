@@ -1,5 +1,6 @@
 package ksci.com.multisensorrecorder
 
+import android.annotation.SuppressLint
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -77,6 +78,7 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun sensorPreview(event: SensorEvent) {
         val mChart = PreviewPageActivity.mChart
         val data = mChart.data
@@ -88,12 +90,16 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
         val s3 = PreviewPageActivity.s3
         val s4 = PreviewPageActivity.s4
 
+        val sensorValue = PreviewPageActivity.sensorValue
+
         when (sensorType) {
             Sensor.TYPE_LIGHT,
             Sensor.TYPE_PROXIMITY -> {
                 s1.addEntry(Entry(s1.entryCount.toFloat(), event.values[0]))
 
                 data.getDataSetByIndex(0).addEntry(Entry(s1.entryCount.toFloat(), event.values[0]))
+
+                sensorValue.text = "x: ${event.values[0]}"
             }
             Sensor.TYPE_ACCELEROMETER,
             Sensor.TYPE_GRAVITY,
@@ -107,6 +113,8 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
                 data.getDataSetByIndex(0).addEntry(Entry(s1.entryCount.toFloat(), event.values[0]))
                 data.getDataSetByIndex(1).addEntry(Entry(s2.entryCount.toFloat(), event.values[1]))
                 data.getDataSetByIndex(2).addEntry(Entry(s3.entryCount.toFloat(), event.values[2]))
+
+                sensorValue.text = "x: ${event.values[0]}\ny: ${event.values[1]}\nz: ${event.values[2]}"
             }
             Sensor.TYPE_ROTATION_VECTOR -> {
                 s1.addEntry(Entry(s1.entryCount.toFloat(), event.values[0]))
@@ -118,6 +126,8 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
                 data.getDataSetByIndex(1).addEntry(Entry(s2.entryCount.toFloat(), event.values[1]))
                 data.getDataSetByIndex(2).addEntry(Entry(s3.entryCount.toFloat(), event.values[2]))
                 data.getDataSetByIndex(3).addEntry(Entry(s4.entryCount.toFloat(), event.values[3]))
+
+                sensorValue.text = "x: ${event.values[0]}\ny: ${event.values[1]}\nz: ${event.values[2]}\nw: ${event.values[3]}"
             }
         }
 

@@ -22,6 +22,7 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.YAxis
@@ -42,6 +43,8 @@ class PreviewPageActivity : AppCompatActivity() {
         lateinit var s2: LineDataSet
         lateinit var s3: LineDataSet
         lateinit var s4: LineDataSet
+
+        lateinit var sensorValue: TextView
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +57,58 @@ class PreviewPageActivity : AppCompatActivity() {
         sensorController = SensorController(sensorManager, "preview")
         sensorController.registerSensor(sensorType, true)
 
+        createSensorInfo(sensorType)
+        sensorValue = findViewById(R.id.sensor_value)
         createChart(sensorType)
+    }
+
+    private fun createSensorInfo(sensorType: Int) {
+        findViewById<TextView>(R.id.sensor_name).text = when(sensorType) {
+            Sensor.TYPE_ACCELEROMETER -> getString(R.string.accelerometer)
+            Sensor.TYPE_GRAVITY -> getString(R.string.gravity)
+            Sensor.TYPE_GYROSCOPE -> getString(R.string.gyroscope)
+            Sensor.TYPE_LIGHT -> getString(R.string.light)
+            Sensor.TYPE_LINEAR_ACCELERATION -> getString(R.string.linearAcceleration)
+            Sensor.TYPE_MAGNETIC_FIELD -> getString(R.string.magneticField)
+            Sensor.TYPE_PROXIMITY -> getString(R.string.proximity)
+            Sensor.TYPE_ROTATION_VECTOR -> getString(R.string.rotationVector)
+            else -> ""
+        }
+        findViewById<TextView>(R.id.sensor_type).text = when(sensorType) {
+            Sensor.TYPE_ACCELEROMETER -> getString(R.string.accelerometer_type)
+            Sensor.TYPE_GRAVITY -> getString(R.string.gravity_type)
+            Sensor.TYPE_GYROSCOPE -> getString(R.string.gyroscope_type)
+            Sensor.TYPE_LIGHT -> getString(R.string.light_type)
+            Sensor.TYPE_LINEAR_ACCELERATION -> getString(R.string.linearAcceleration_type)
+            Sensor.TYPE_MAGNETIC_FIELD -> getString(R.string.magneticField_type)
+            Sensor.TYPE_PROXIMITY -> getString(R.string.proximity_type)
+            Sensor.TYPE_ROTATION_VECTOR -> getString(R.string.rotationVector_type)
+            else -> ""
+        }
+
+        findViewById<TextView>(R.id.sensor_info).text = when(sensorType) {
+            Sensor.TYPE_ACCELEROMETER -> getString(R.string.accelerometer_info)
+            Sensor.TYPE_GRAVITY -> getString(R.string.gravity_info)
+            Sensor.TYPE_GYROSCOPE -> getString(R.string.gyroscope_info)
+            Sensor.TYPE_LIGHT -> getString(R.string.light_info)
+            Sensor.TYPE_LINEAR_ACCELERATION -> getString(R.string.linearAcceleration_info)
+            Sensor.TYPE_MAGNETIC_FIELD -> getString(R.string.magneticField_info)
+            Sensor.TYPE_PROXIMITY -> getString(R.string.proximity_info)
+            Sensor.TYPE_ROTATION_VECTOR -> getString(R.string.rotationVector_info)
+            else -> ""
+        }
+
+        findViewById<TextView>(R.id.sensor_uses).text = when(sensorType) {
+            Sensor.TYPE_ACCELEROMETER -> getString(R.string.accelerometer_uses)
+            Sensor.TYPE_GRAVITY -> getString(R.string.gravity_uses)
+            Sensor.TYPE_GYROSCOPE -> getString(R.string.gyroscope_uses)
+            Sensor.TYPE_LIGHT -> getString(R.string.light_uses)
+            Sensor.TYPE_LINEAR_ACCELERATION -> getString(R.string.linearAcceleration_uses)
+            Sensor.TYPE_MAGNETIC_FIELD -> getString(R.string.magneticField_uses)
+            Sensor.TYPE_PROXIMITY -> getString(R.string.proximity_uses)
+            Sensor.TYPE_ROTATION_VECTOR -> getString(R.string.rotationVector_uses)
+            else -> ""
+        }
     }
 
     private fun createChart(sensorType: Int) {
