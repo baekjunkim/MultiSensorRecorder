@@ -70,7 +70,7 @@ class MainPageActivity : AppCompatActivity() {
         var mDelay: Int = 1000 // 1000 = every 1 second
     }
 
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
+//    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page)
@@ -251,7 +251,7 @@ class MainPageActivity : AppCompatActivity() {
                     popupWindow = PopupWindow(
                         viewPopup, // Custom view to show in popup window
                         LinearLayout.LayoutParams.MATCH_PARENT, // Width of popup window
-                        findViewById<ScrollView>(R.id.scroll_view).height // Window height
+                        findViewById<ScrollView>(R.id.scroll_view).height*16/15 // Window height
                     )
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

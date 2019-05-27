@@ -18,32 +18,7 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
     override fun onSensorChanged(event: SensorEvent) {
         when (type) {
             "record" -> {
-                when (event.sensor.type) {
-                    Sensor.TYPE_ACCELEROMETER -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                    Sensor.TYPE_GRAVITY -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                    Sensor.TYPE_GYROSCOPE -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                    Sensor.TYPE_LIGHT -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                    Sensor.TYPE_LINEAR_ACCELERATION -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                    Sensor.TYPE_MAGNETIC_FIELD -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                    Sensor.TYPE_PROXIMITY -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                    Sensor.TYPE_ROTATION_VECTOR -> {
-                        sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
-                    }
-                }
+                sensorDataRecord(MainPageActivity.sensorData[event.sensor.type]!!, event)
             }
             "preview" -> {
                 sensorPreview(event)
@@ -135,11 +110,11 @@ class SensorController(_sensorManager: SensorManager, _type: String) : SensorEve
 
         if (event.values.min()?:0f < minYAxis) {
             minYAxis = event.values.min()?:0f
-            yAxis.axisMinimum = minYAxis * 11/10
+            yAxis.axisMinimum = minYAxis * 12/10
         }
         if (event.values.max()?:0f > maxYAxis) {
             maxYAxis = event.values.max()?:0f
-            yAxis.axisMaximum = maxYAxis * 11/10
+            yAxis.axisMaximum = maxYAxis * 12/10
         }
 
         mChart.data.notifyDataChanged()

@@ -165,12 +165,24 @@ class PreviewPageActivity : AppCompatActivity() {
         set.setDrawValues(false)
         set.setDrawCircles(false)
         set.mode = LineDataSet.Mode.CUBIC_BEZIER
-        set.cubicIntensity = 1.5f
+        set.cubicIntensity = 1f
         return set
     }
 
     override fun onPause() {
         super.onPause()
+
+        sensorController.registerSensor(sensorType, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        sensorController.registerSensor(sensorType, true)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
 
         sensorController.registerSensor(sensorType, false)
     }
