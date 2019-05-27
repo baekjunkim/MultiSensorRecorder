@@ -284,14 +284,20 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp" android:layout_weight="9"/>
 
-                <ImageButton
-                        android:id="@+id/imageButton_gpsPosition"
-                        android:layout_width="0dp"
-                        android:background="@color/colorBackground1"
-                        android:layout_gravity="center"
-                        android:layout_height="45dp" android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_send"
-                        android:contentDescription="@string/todo"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:background="@color/colorBackground1"
+                    android:layout_gravity="center"
+                    android:layout_height="45dp" android:layout_weight="1"/>
+
+                <!--<ImageButton-->
+                        <!--android:id="@+id/imageButton_gpsPosition"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:background="@color/colorBackground1"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_height="45dp" android:layout_weight="1"-->
+                        <!--app:srcCompat="@android:drawable/ic_menu_send"-->
+                        <!--android:contentDescription="@string/todo"/>-->
 
             </LinearLayout>
 
